@@ -9,10 +9,13 @@ resource "aws_instance" "dasa2024" {
     
     user_data = <<-EOF
                 #!/bin/bash
-                echo "Hello World" > index.html
+                sudo yum install -y httpd
+                sudo systemctl enable httpd
+                sudo systemctl start httpd
+                echo "Hello World" > /var/www/html/index.html
                 nohup busybox httpd -f -p 8080 &
                 EOF
-                
+
     user_data_replace_on_change = true
 
     tags = {
