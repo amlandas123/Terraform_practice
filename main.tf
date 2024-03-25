@@ -27,8 +27,8 @@ resource "aws_security_group" "instance" {
     name = "terraform_practice_sg"
   
     ingress {
-        from_port = 8080
-        to_port = 8080
+        from_port = All
+        to_port = All
         protocol = "All"
         cidr_blocks = ["0.0.0.0/0"]
     }
