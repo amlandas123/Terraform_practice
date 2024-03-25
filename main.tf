@@ -12,6 +12,7 @@ resource "aws_instance" "dasa2024" {
                 echo "Hello World" > index.html
                 nohup busybox httpd -f -p 8080 &
                 EOF
+                
     user_data_replace_on_change = true
 
     tags = {
