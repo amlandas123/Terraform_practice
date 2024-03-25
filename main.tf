@@ -9,10 +9,7 @@ resource "aws_instance" "dasa2024" {
     
     user_data = <<-EOF
                 #!/bin/bash
-                sudo yum install -y httpd
-                sudo systemctl enable httpd
-                sudo systemctl start httpd
-                echo "Hello World" > /var/www/html/index.html
+                echo "Hello World" > index.html
                 nohup busybox httpd -f -p 8080 &
                 EOF
 
