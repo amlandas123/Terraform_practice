@@ -19,13 +19,19 @@ resource "aws_instance" "dasa2024" {
         Name = "dasa_practice"
     }    
 }
+variable "tcp_port" {
+    description = "Used to open port"
+    type = number
+    default = 8080
+}
+
 
 resource "aws_security_group" "sg-demo" {
     name = "terraform_practice_sg"
   
     ingress {
-        from_port = 8080
-        to_port = 8080
+        from_port = var.tcp_port
+        to_port = var.tcp_port
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
