@@ -24,24 +24,33 @@ resource "aws_launch_configuration" "dasa2024" {
     image_id = "ami-0f75a13ad2e340a58"
     instance_type = "t2.micro"
     security_groups = [ aws_security_group.sg-demo.id ]
-    
+
+
     user_data = <<-EOF
                 #!/bin/bash
-                echo "Hello World" > index.html
-                nohup busybox httpd -f ${var.tcp_port}  &
+                echo "*** Installing apache2"
+                sudo apt update -y
+                sudo apt install apache2 -y
+                echo "*** Completed Installing apache2"
                 EOF
+    
+    # user_data = <<-EOF
+    #             #!/bin/bash
+    #             echo "Hello World" > index.html
+    #             nohup busybox httpd -f ${var.tcp_port}  &
+    #             EOF
 
 }    
 
-resource "aws_autoscaling_group" "dasa-asg" {
-    launch_configuration = aws_launch_configuration.dasa2024.name
-    min_size = 2
-    max_size = 6
-    tag {
-      key = "Name"
-      value = "terraform as example"
-      propagate_at_launch = true
-    }
+# resource "aws_autoscaling_group" "dasa-asg" {
+#     launch_configuration = aws_launch_configuration.dasa2024.name
+#     min_size = 2
+#     max_size = 6
+#     tag {
+#       key = "Name"
+#       value = "terraform as example"
+#       propagate_at_launch = true
+#     }
 
 
 }
