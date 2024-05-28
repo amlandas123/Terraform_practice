@@ -20,8 +20,8 @@ resource "aws_security_group" "sg-demo" {
 
 }
 
-resource "aws_launch_configuration" "dasa2024" {
-    image_id = "ami-0f75a13ad2e340a58"
+resource "aws_instance" "dasa2024" {
+    ami = "ami-0f75a13ad2e340a58"
     instance_type = "t2.micro"
     security_groups = [ aws_security_group.sg-demo.id ]
 
